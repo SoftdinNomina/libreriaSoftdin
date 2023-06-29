@@ -1,11 +1,12 @@
 {
-    "name": "softdin/libreria",
+    "name": "softdin/servicio",
     "description": "Libreria de funciones SOFTDIN",
     "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Softdin\\Libreria\\": "src/"
+            "App\\": "app/",
+            "Softdin\\Servicio\\": "src/"
         }
     },
     "authors": [
