@@ -4,7 +4,7 @@ namespace Softdin\Servicio;
 
 class libreria{
 
-    public function empresa(){
+    public static function empresa(){
         return 'Softdin';
     }
 }
