@@ -1,6 +1,6 @@
 <?php
 
-namespace Softdin\Libreria;
+namespace Softdin\Servicio;
 
 class libreria{
 
