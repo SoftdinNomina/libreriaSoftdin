@@ -14,6 +14,6 @@
             "email": "deivibarra@yahoo.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {}
 }
