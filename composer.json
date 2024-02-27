@@ -15,7 +15,5 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {
-        // "softdin/servicio": "1.0"
-    }
+    "require": {}
 }
