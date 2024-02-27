@@ -1,6 +1,6 @@
 <?php
 
-namespace Softdin\Servicio;
+namespace softdin\servicio;
 
 use ReflectionClass;
 use Illuminate\Support\Collection;

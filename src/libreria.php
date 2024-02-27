@@ -1,6 +1,6 @@
 <?php
-
-namespace Softdin\Servicio;
+ 
+namespace softdin\servicio;
 
 use Exception;
 use Carbon\Carbon;
