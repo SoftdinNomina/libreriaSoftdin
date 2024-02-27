@@ -4,11 +4,12 @@ namespace Softdin\Servicio;
 
 use Exception;
 use Carbon\Carbon;
+use DateTime;
 
 class libreria
 {
 
-    public static function empresa()
+    public static function myEmpresa()
     {
         return 'Softdin';
     }
@@ -201,7 +202,7 @@ class libreria
         $fechaCarbon = Carbon::parse($fecha);
 
         // Retorna el primer día del mes de la fecha dada
-        return $fechaCarbon->firstOfMonth();    
+        return $fechaCarbon->firstOfMonth();
     }
 
     public static function finMes($fecha)
@@ -212,6 +213,595 @@ class libreria
         // Retorna el último día del mes de la fecha dada
         return $fechaCarbon->endOfMonth();
     }
+
+    public static function finPrimeraQuincena(DateTime $fecha)
+    {
+        return DateTime::createFromFormat('d/m/Y', '15/' . $fecha->format('m/Y'));
+    }
+
+    public static function fechaInicioAnalisis(DateTime $fechaingresoCorte, DateTime $fechaterminoCorte, DateTime $fechaingresoMV, DateTime $fechaterminoMV)
+    {
+        try {
+            if ($fechaterminoMV >= $fechaingresoCorte && $fechaingresoMV <= $fechaterminoCorte) {
+                if ($fechaingresoMV >= $fechaingresoCorte) {
+                    return $fechaingresoMV;
+                } else {
+                    return $fechaingresoCorte;
+                }
+            }
+            return $fechaingresoMV;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function fechaTerminoAnalisis(DateTime $fechaingresoCorte, DateTime $fechaterminoCorte, DateTime $fechaingresoMV, DateTime $fechaterminoMV)
+    {
+        try {
+            if ($fechaterminoMV >= $fechaingresoCorte && $fechaingresoMV <= $fechaterminoCorte) {
+                if ($fechaingresoMV >= $fechaingresoCorte) {
+                    return $fechaterminoMV < $fechaterminoCorte ? $fechaterminoMV : $fechaterminoCorte;
+                } else {
+                    return $fechaterminoMV < $fechaterminoCorte ? $fechaterminoMV : $fechaterminoCorte;
+                }
+            }
+            return $fechaterminoMV;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function diasEnMes($fecha)
+    {
+        return (new DateTime($fecha))->format('t');
+    }
+
+    public static function totalDias($fechaini, $fechafin)
+    {
+        return (int) $fechafin->diff($fechaini)->format('%a') + 1;
+    }
+
+    public static function CompletarDiasCONTABLE($fechaini, $fechafin)
+    {
+        try {
+            $diatotal = 0;
+            while ($fechaini <= $fechafin) {
+                $fechaFinMes = self::finMes($fechaini);
+                if ($fechaini <= $fechaFinMes && $fechafin >= $fechaFinMes) {
+                    $diatotal += self::totalDias($fechaini, $fechafin);
+                    if ($fechaFinMes->format('d') == 31) {
+                        $diatotal -= 1;
+                    } else {
+                        if ($fechaFinMes->format('d') < 30) {
+                            $diatotal += 30 - $fechaFinMes->format('d');
+                        }
+                    }
+                } elseif ($fechaini <= $fechafin && $fechaFinMes > $fechafin) {
+                    $diatotal += self::totalDias($fechaini, $fechafin);
+                }
+                $fechaini = $fechaini->modify('+1 month');
+            }
+            return $diatotal;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function LaEdad($fechanacimiento)
+    {
+        try {
+            $edad = (new DateTime())->diff($fechanacimiento)->y;
+            return $edad;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function ContarDias(DateTime $fechaingresoCorte, DateTime $fechaterminoCorte, DateTime $fechaingresoMV, DateTime $fechaterminoMV, $tipopago): int
+    {
+        try {
+            $fechainicio = new DateTime();
+            $fechatermino = new DateTime();
+            $dias = 0;
+            if ($fechaterminoMV >= $fechaingresoCorte && $fechaingresoMV <= $fechaterminoCorte) {
+                if ($fechaingresoMV >= $fechaingresoCorte) {
+                    $fechainicio = $fechaingresoMV;
+                    $fechatermino = $fechaterminoMV < $fechaterminoCorte ? $fechaterminoMV : $fechaterminoCorte;
+                } else {
+                    $fechainicio = $fechaingresoCorte;
+                    $fechatermino = $fechaterminoMV < $fechaterminoCorte ? $fechaterminoMV : $fechaterminoCorte;
+                }
+
+                $dias = (float) self::TotalDias($fechainicio, $fechatermino);
+                if ($tipopago == EnumTipoPago::COMERCIAL) {
+                    $dias = self::CompletarDiasCONTABLE($fechainicio, $fechatermino);
+                }
+            }
+            return $dias;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function ContarDiasTP($fechaingresoMV, $dias, $tipopago)
+    {
+        try {
+            $fechatermino = $fechaingresoMV;
+            while ($fechaingresoMV <= $fechatermino->modify("+$dias days")) {
+                if ($tipopago == EnumTipoPago::COMERCIAL) {
+                    $dias += self::CompletarDiasCONTABLE($fechaingresoMV, $fechaingresoMV);
+                }
+                $fechaingresoMV = $fechaingresoMV->modify("+1 day");
+            }
+            return $fechatermino->modify("-1 day");
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function CambiarComaPunto($cadena)
+    {
+        try {
+            if (!empty($cadena)) {
+                $cadena = str_replace(",", ".", $cadena);
+            } else {
+                $cadena = "0";
+            }
+            return $cadena;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function Multiplos($valor, $multiplo)
+    {
+        try {
+            $valor = round($valor / $multiplo);
+            return $valor * $multiplo;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function MultiplosPILA_SMLV($valor, $multiplo, $SalarioBasicoEsIgualAlSMLV)
+    {
+        try {
+            if ($SalarioBasicoEsIgualAlSMLV) {
+                return $valor;
+            } else {
+                $valorMul = $valor / $multiplo;
+                $entero = floor($valorMul);
+                if (($valorMul - $entero) > 0) {
+                    return ($entero + 1) * $multiplo;
+                }
+                return $entero * $multiplo;
+            }
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+
+    public static function MultiplosPILA_NOVEDAD($valor, $salario, $SMLV, $dias, $NoNovedades)
+    {
+        try {
+            $VSMLV = ($SMLV / 30.0) * $dias;
+            $VSalario = ($salario / 30.0) * $dias;
+
+            // Ajustando SMLV
+            $VSMLV = round($VSMLV);
+            // Ajustando Salario Basico
+            $VSalario = round($VSalario);
+
+            if ($VSalario <= $VSMLV || $NoNovedades > 1) {
+                if ($VSMLV > $valor) {
+                    return $VSMLV;
+                } elseif ($valor > $VSalario) {
+                    return $valor;
+                } else {
+                    $dif = $valor - $VSalario;
+                    if ($dif > 1 || $dif < -1) {
+                        return $valor;
+                    }
+                    return $VSalario;
+                }
+            } else {
+                $valor = round($valor);
+                $Vdeci = $valor / 1000;
+                $Vent = floor($Vdeci);
+                $Vdeci = $Vdeci - $Vent;
+
+                if ($Vdeci > 0) {
+                    $valor = ($Vent + 1) * 1000;
+                } else {
+                    $valor = $Vent * 1000;
+                }
+
+                $dif = $valor - $VSalario;
+                if ($dif > 1000 || $dif < -1) {
+                    return $valor;
+                }
+                return $VSalario;
+            }
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function MultiplosPILA($valor, $multiplo)
+    {
+        try {
+            $valorMul = (float) $valor / (float) $multiplo;
+            $entero = floor($valorMul);
+            if (($valorMul - $entero) > 0) {
+                return ($entero + 1) * $multiplo;
+            }
+            return $entero * $multiplo;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function BuscandoPosicionPalabraCadena($cadena, $palabra)
+    {
+        try {
+            for ($i = 0; $i < strlen($cadena) - 1; $i++) {
+                if ($i + strlen($palabra) <= strlen($cadena)) {
+                    if ($palabra === substr($cadena, $i, strlen($palabra))) {
+                        return $i;
+                    }
+                } else {
+                    return -1;
+                }
+            }
+            return -1;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function BuscandoPosicionCaracterCadena($cadena, $caracter)
+    {
+        try {
+            for ($i = 0; $i < strlen($cadena); $i++) {
+                if ($caracter === substr($cadena, $i, 1)) {
+                    return $i;
+                }
+            }
+            return -1;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function BuscandoPosicionCaracterCadena_POSICION($cadena, $caracter, $posicion)
+    {
+        try {
+            $pos = 0;
+            for ($i = 0; $i < strlen($cadena); $i++) {
+                if ($caracter === substr($cadena, $i, 1)) {
+                    $pos++;
+                    if ($pos == $posicion) {
+                        return $i;
+                    }
+                }
+            }
+            return -1;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function ExistePalabraCadena($cadena, $palabra)
+    {
+        try {
+            return self::BuscandoPosicionPalabraCadena($cadena, $palabra) >= 0 ? true : false;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function CuantosCaracterCadena($cadena, $caracter)
+    {
+        try {
+            $count = 0;
+            for ($i = 0; $i < strlen($cadena); $i++) {
+                if ($caracter === substr($cadena, $i, 1)) {
+                    $count++;
+                }
+            }
+            return $count;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function EliminarPalabraCadena($cadena, $palabra)
+    {
+        $posicion = self::BuscandoPosicionPalabraCadena($cadena, $palabra);
+        if ($posicion >= 0) {
+            return substr_replace($cadena, '', $posicion, strlen($palabra));
+        }
+        return $cadena;
+    }
+
+    public static function RellenarEspaciosIzquierda($cadena, $longitud)
+    {
+        try {
+            while (strlen($cadena) < $longitud) {
+                $cadena = " " . $cadena;
+            }
+            return substr($cadena, 0, $longitud);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function RellenarEspaciosDerecha($cadena, $longitud)
+    {
+        try {
+            while (strlen($cadena) < $longitud) {
+                $cadena = $cadena . " ";
+            }
+            return substr($cadena, 0, $longitud);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function RellenarEspaciosVariable($variable, $longitud)
+    {
+        try {
+            $var = "";
+            if ($variable !== "") {
+                do {
+                    $var .= $variable;
+                } while (strlen($var) < $longitud);
+            } else {
+                $var = self::RellenarEspaciosIzquierda($variable, $longitud);
+            }
+            return substr($var, 0, $longitud);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function RellenarCerrosIzquierda($numero, $longitud)
+    {
+        try {
+            if (strlen((string) $numero) < $longitud) {
+                return self::RellenarEspaciosVariable("0", $longitud - strlen((string) $numero)) . $numero;
+            }
+            return substr((string) $numero, 0, $longitud);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function RellenarCerrosDerecha($numero, $longitud)
+    {
+        try {
+            if (strlen((string) $numero) < $longitud) {
+                return (string) $numero . self::RellenarEspaciosVariable("0", $longitud - strlen((string) $numero));
+            }
+            return substr((string) $numero, 0, $longitud);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function RellenarIRP($cadena, $longitud)
+    {
+        try {
+            if ($cadena !== null && $cadena !== "") {
+                if (strlen((string) $cadena) < $longitud) {
+                    return self::RellenarEspaciosVariable("0", $longitud - strlen((string) $cadena)) . $cadena;
+                } else {
+                    return substr((string) $cadena, 0, $longitud);
+                }
+            }
+            return self::RellenarEspaciosVariable("0", $longitud);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function CadenaLongitud($cadena, $longitud)
+    {
+        $result = $cadena;
+        if (strlen($cadena) > $longitud) {
+            $result = substr($cadena, 0, $longitud);
+        }
+        return $result;
+    }
+
+    public static function FechaAAAA_MM($fecha)
+    {
+        try {
+            $año = $fecha->format('Y');
+            $mes = self::RellenarCerrosIzquierda($fecha->format('m'), 2);
+            return $año . "-" . $mes;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function FechaAAAAMM($fecha)
+    {
+        try {
+            $año = $fecha->format('Y');
+            $mes = self::RellenarCerrosIzquierda($fecha->format('m'), 2);
+            return $año . $mes;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function FechaAAAA_MM_DD($fecha)
+    {
+        try {
+            $año = $fecha->format('Y');
+            $mes = self::RellenarCerrosIzquierda($fecha->format('m'), 2);
+            $dia = self::RellenarCerrosIzquierda($fecha->format('d'), 2);
+            return $año . "-" . $mes . "-" . $dia;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function FechaAAAA_MM_DD_HH_MM_SS($fecha)
+    {
+        try {
+            $año = $fecha->format('Y');
+            $mes = self::RellenarCerrosIzquierda($fecha->format('m'), 2);
+            $dia = self::RellenarCerrosIzquierda($fecha->format('d'), 2);
+            $hora = self::RellenarCerrosIzquierda($fecha->format('H'), 2);
+            $minuto = self::RellenarCerrosIzquierda($fecha->format('i'), 2);
+            $segundo = self::RellenarCerrosIzquierda($fecha->format('s'), 2);
+
+            return $año . "-" . $mes . "-" . $dia . " " . $hora . ":" . $minuto . ":" . $segundo;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+
+    public static function FechaAAMMDD($fecha)
+    {
+        try {
+            return substr($fecha->format('Y'), 2, 2) . self::RellenarCerrosIzquierda($fecha->format('m'), 2) . self::RellenarCerrosIzquierda($fecha->format('d'), 2);
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+
+    public static function FechaAAAAMMDD($fecha)
+    {
+        try {
+            $año = $fecha->format('Y');
+            $mes = self::RellenarCerrosIzquierda($fecha->format('m'), 2);
+            $dia = self::RellenarCerrosIzquierda($fecha->format('d'), 2);
+            return $año . $mes . $dia;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+
+    public static function ConvertiMatrizString($matriz)
+    {
+        $cadena = '';
+        $cont = 0;
+        foreach ($matriz as $campo) {
+            if ($cont === 0) {
+                $cadena .= $campo;
+            } else {
+                $cadena .= ',' . $campo;
+            }
+            $cont++;
+        }
+        return $cadena;
+    }
+
+    public static function Image($img)
+    {
+        //Mirar si depronto funciona
+        try {
+            $bytes = [];
+            if ($img != null) {
+                $sTemp = tempnam(sys_get_temp_dir(), 'image');
+                $fs = fopen($sTemp, 'w');
+                imagejpeg($img, $sTemp);
+                fclose($fs);
+                //
+                $imgLength = filesize($sTemp);
+                $bytes = file_get_contents($sTemp);
+                unlink($sTemp);
+            }
+            return $bytes;
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function QuitarEspaciosBlancos($cadena)
+    {
+        $nuevacadena = str_replace(' ', '', $cadena);
+        return $nuevacadena;
+    }
+
+    public static function NE_TipoDocumento($tipoIdentificacion)
+    {
+        try {
+            switch ($tipoIdentificacion) {
+                case EnumTipoIdentificacion::CC:
+                    return EnumNE_TipoDocumento::Cedula_ciudadania;
+                case EnumTipoIdentificacion::CE:
+                    return EnumNE_TipoDocumento::Cedula_extranjeria;
+                case EnumTipoIdentificacion::NI:
+                    return EnumNE_TipoDocumento::NIT;
+                case EnumTipoIdentificacion::PA:
+                    return EnumNE_TipoDocumento::Pasaporte;
+                case EnumTipoIdentificacion::RC:
+                    return EnumNE_TipoDocumento::Registro_civil;
+                case EnumTipoIdentificacion::TI:
+                    return EnumNE_TipoDocumento::Tarjeta_identidad;
+                default:
+                    throw new \Exception("Tipo de identificación no implementado: $tipoIdentificacion");
+            }
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
+    public static function NE_TipoContrato($tipocontrato)
+    {
+        try {
+            switch ($tipocontrato) {
+                case EnumTipoContrato::FIJO:
+                    return EnumNE_TipoContrato::Termino_Fijo;
+                case EnumTipoContrato::INDEFINIDO:
+                    return EnumNE_TipoContrato::Termino_Indefinido;
+                case EnumTipoContrato::OBRA_LABOR:
+                    return EnumNE_TipoContrato::Obra_Labor;
+                case EnumTipoContrato::APRENDIZAJE:
+                    return EnumNE_TipoContrato::Aprendizaje;
+                case EnumTipoContrato::PRACTICAS_PASANTIAS:
+                    return EnumNE_TipoContrato::Practicas_Pasantias;
+                default:
+                    throw new \Exception("Tipo de contrato no implementado: $tipocontrato");
+            }
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+    
+    // public static function DiasSemana($dia)
+    // {
+    //     try {
+    //         switch ($dia) {
+    //             case DayOfWeek::Monday:
+    //                 return EnumDiasSemana::LUNES;
+    //             case DayOfWeek::Tuesday:
+    //                 return EnumDiasSemana::MARTES;
+    //             case DayOfWeek::Wednesday:
+    //                 return EnumDiasSemana::MIERCOLES;
+    //             case DayOfWeek::Thursday:
+    //                 return EnumDiasSemana::JUEVES;
+    //             case DayOfWeek::Friday:
+    //                 return EnumDiasSemana::VIERNES;
+    //             case DayOfWeek::Saturday:
+    //                 return EnumDiasSemana::SABADO;
+    //             case DayOfWeek::Sunday:
+    //                 return EnumDiasSemana::DOMINGO;
+    //             default:
+    //                 throw new Exception("Día de la semana no válido.");
+    //         }
+    //     } catch (Exception $ex) {
+    //         throw new Exception($ex->getMessage());
+    //     }
+    // }
 }
 
 
