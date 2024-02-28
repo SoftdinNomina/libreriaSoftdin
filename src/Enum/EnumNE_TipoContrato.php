@@ -41,5 +41,21 @@ class EnumNE_TipoContrato
         return self::getCollection()->firstWhere('description', $description) ?? null;
     }
 
+    public static function NE_TipoDocumento(EnumTipoIdentificacion $tipodocumento)
+    {
+        $mapeo = [
+                EnumTipoIdentificacion::CC => EnumNE_TipoDocumento::Cedula_ciudadania,
+                EnumTipoIdentificacion::CE => EnumNE_TipoDocumento::Cedula_extranjeria,
+                EnumTipoIdentificacion::NI =>  EnumNE_TipoDocumento::NIT,
+                EnumTipoIdentificacion::PA => EnumNE_TipoDocumento::Pasaporte,
+                EnumTipoIdentificacion::RC => EnumNE_TipoDocumento::Registro_civil,
+                EnumTipoIdentificacion::TI => EnumNE_TipoDocumento::Tarjeta_identidad,
+        ];
 
+        if (array_key_exists($tipodocumento, $mapeo)) {
+            return $mapeo[$tipodocumento];
+        } else {
+            throw new \InvalidArgumentException("Tipo de documento no implementado: $tipodocumento");
+        }
+    }
 }

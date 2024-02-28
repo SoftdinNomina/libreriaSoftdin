@@ -5,10 +5,6 @@ namespace softdin\servicio;
 use Exception;
 use Carbon\Carbon;
 use DateTime;
-use softdin\servicio\Enum\EnumNE_TipoContrato;
-use softdin\servicio\Enum\EnumNE_TipoDocumento;
-use softdin\servicio\Enum\EnumTipoContrato;
-use softdin\servicio\Enum\EnumTipoIdentificacion;
 use softdin\servicio\Enum\EnumTipoPago;
 
 class libreria
@@ -736,473 +732,240 @@ class libreria
         return $nuevacadena;
     }
 
-    public static function NE_TipoDocumento($tipoIdentificacion)
-    {
-        try {
-            switch ($tipoIdentificacion) {
-                case EnumTipoIdentificacion::CC:
-                    return EnumNE_TipoDocumento::Cedula_ciudadania;
-                case EnumTipoIdentificacion::CE:
-                    return EnumNE_TipoDocumento::Cedula_extranjeria;
-                case EnumTipoIdentificacion::NI:
-                    return EnumNE_TipoDocumento::NIT;
-                case EnumTipoIdentificacion::PA:
-                    return EnumNE_TipoDocumento::Pasaporte;
-                case EnumTipoIdentificacion::RC:
-                    return EnumNE_TipoDocumento::Registro_civil;
-                case EnumTipoIdentificacion::TI:
-                    return EnumNE_TipoDocumento::Tarjeta_identidad;
-                default:
-                    throw new \Exception("Tipo de identificación no implementado: $tipoIdentificacion");
-            }
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage());
-        }
-    }
-
-    public static function NE_TipoContrato($tipocontrato)
-    {
-        try {
-            switch ($tipocontrato) {
-                case EnumTipoContrato::FIJO:
-                    return EnumNE_TipoContrato::Termino_Fijo;
-                case EnumTipoContrato::INDEFINIDO:
-                    return EnumNE_TipoContrato::Termino_Indefinido;
-                case EnumTipoContrato::OBRA_LABOR:
-                    return EnumNE_TipoContrato::Obra_Labor;
-                case EnumTipoContrato::APRENDIZAJE:
-                    return EnumNE_TipoContrato::Aprendizaje;
-                case EnumTipoContrato::PRACTICAS_PASANTIAS:
-                    return EnumNE_TipoContrato::Practicas_Pasantias;
-                default:
-                    throw new \Exception("Tipo de contrato no implementado: $tipocontrato");
-            }
-        } catch (\Exception $ex) {
-            throw new \Exception($ex->getMessage());
-        }
-    }
-    
-    // public static function DiasSemana($dia)
-    // {
-    //     try {
-    //         switch ($dia) {
-    //             case DayOfWeek::Monday:
-    //                 return EnumDiasSemana::LUNES;
-    //             case DayOfWeek::Tuesday:
-    //                 return EnumDiasSemana::MARTES;
-    //             case DayOfWeek::Wednesday:
-    //                 return EnumDiasSemana::MIERCOLES;
-    //             case DayOfWeek::Thursday:
-    //                 return EnumDiasSemana::JUEVES;
-    //             case DayOfWeek::Friday:
-    //                 return EnumDiasSemana::VIERNES;
-    //             case DayOfWeek::Saturday:
-    //                 return EnumDiasSemana::SABADO;
-    //             case DayOfWeek::Sunday:
-    //                 return EnumDiasSemana::DOMINGO;
-    //             default:
-    //                 throw new Exception("Día de la semana no válido.");
-    //         }
-    //     } catch (Exception $ex) {
-    //         throw new Exception($ex->getMessage());
-    //     }
-    // }
 }
 
 
-class CantidadLetra
-{
-    private $sUnidades = [
-        "",
-        "un",
-        "dos",
-        "tres",
-        "cuatro",
-        "cinco",
-        "seis",
-        "siete",
-        "ocho",
-        "nueve",
-        "diez",
-        "once",
-        "doce",
-        "trece",
-        "catorce",
-        "quince",
-        "dieciseis",
-        "diecisiete",
-        "dieciocho",
-        "diecinueve",
-        "veinte",
-        "veintiún",
-        "veintidos",
-        "veintitres",
-        "veinticuatro",
-        "veinticinco",
-        "veintiseis",
-        "veintisiete",
-        "veintiocho",
-        "veintinueve"
-    ];
+// class EvalExpMatematicas
+// {
+//     const Delimitadores = "+-*/%^=()";
 
-    private $sDecenas = ["", "diez", "veinte", "treinta", "cuarenta", "cincuenta", "sesenta", "setenta", "ochenta", "noventa"];
+//     private $exp;
+//     private $lenghtExp;
+//     private $indice;
+//     private $token;
+//     private TipoToken $tipoTok;
+//     public $listaVar;
 
-    private $sCentenas = ["", "ciento", "doscientos", "trescientos", "cuatrocientos", "quinientos", "seiscientos", "setecientos", "ochocientos", "novecientos"];
+//     public function __construct()
+//     {
+//         $this->listaVar = array("res" => 0.0);
+//     }
 
-    private $sResultado = "";
+//     public function Analizar($exp)
+//     {
+//         $result = 0.0;
+//         $this->exp = $exp;
+//         $this->lenghtExp = strlen($exp);
+//         $this->indice = 0;
 
-    public function convertirCadena($sNumero)
-    {
-        $dNumero = (double) $sNumero;
-        $dNumAux = 0;
-        $x = '';
-        $sAux = '';
+//         $this->ObtToken();
 
-        $this->sResultado = " ";
+//         if ($this->token == '') {
+//             throw new Exception("EvalExp: " . TiposError::SinExpresion . " " . $this->token);
+//         }
 
-        try {
-            $dNumero = (double) $sNumero;
-        } catch (\Throwable $th) {
-            return "";
-        }
+//         $this->evalExp1($result);
 
-        if ($dNumero > 999999999999) {
-            return "";
-        }
+//         if ($this->token != '' || $this->indice != $this->lenghtExp) {
+//             throw new Exception("EvalExp :" . TiposError::Sintaxis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
+//         }
 
-        if ($dNumero > 999999999) {
-            $dNumAux = fmod($dNumero, 1000000000000);
-            $this->sResultado .= $this->numeros($dNumAux, 1000000000) . " mil ";
-        }
+//         $this->listaVar["res"] = $result;
+//         return $result;
+//     }
 
-        if ($dNumero > 999999) {
-            $dNumAux = fmod($dNumero, 1000000000);
-            if (trim($this->numeros($dNumAux, 1000000)) == ("un")) {
-                $this->sResultado .= $this->numeros($dNumAux, 1000000) . " millon ";
-            } else {
-                $this->sResultado .= $this->numeros($dNumAux, 1000000) . " millones ";
-            }
-        }
+//     private function evalExp1(&$result)
+//     {
+//         $token = $this->token;
+//         $tipoTok = $this->tipoTok;
+//         $prog = $this->indice;
 
-        if ($dNumero > 999) {
-            $dNumAux = fmod($dNumero, 1000000);
-            $this->sResultado .= $this->numeros($dNumAux, 1000) . " mil ";
-        }
+//         $this->ObtToken();
 
-        $dNumAux = fmod($dNumero, 1000);
-        $this->sResultado .= $this->numeros($dNumAux, 1);
+//         if ($token !== "=") {
+//             $this->token = $token;
+//             $this->tipoTok = $tipoTok;
+//             $this->indice = $prog;
+//         } else {
+//             $this->ObtToken();
+//             $this->evalExp1($result);
+//             if (array_key_exists($token, $this->listaVar)) {
+//                 $this->listaVar[$token] = $result;
+//             } else {
+//                 $this->listaVar[$token] = $result;
+//             }
+//             return;
+//         }
+//         $this->evalExp2($result);
+//     }
 
-        // Verificar si contiene punto y obtener los decimales
-        $sAux = (string) $dNumero;
-        if (strpos($sAux, ".") !== false) {
-            $this->sResultado .= $this->obtenerDecimales($sAux);
-        }
+//     private function evalExp2(&$result)
+//     {
+//         $op = '';
+//         $temp = 0.0;
 
-        // Convertir el primer carácter a mayúscula
-        $sAux = $this->sResultado;
-        $x = strtoupper($this->sResultado[1]);
-        $this->sResultado = $x;
+//         $this->evalExp3($result);
 
-        for ($i = 2; $i < strlen($sAux); $i++) {
-            $this->sResultado .= $sAux[$i];
-        }
+//         while ($this->token === "+" || $this->token === "-") {
+//             $op = $this->token[0];
+//             $this->ObtToken();
+//             $this->evalExp3($temp);
 
-        return $this->sResultado;
-    }
+//             switch ($op) {
+//                 case '+':
+//                     $result += $temp;
+//                     break;
+//                 case '-':
+//                     $result -= $temp;
+//                     break;
+//             }
+//         }
+//     }
 
-    private function numeros($dNumAux, $dFactor)
-    {
-        $dCociente = $dNumAux / $dFactor;
-        $dNumero = 0;
-        $iNumero = 0;
-        $sNumero = "";
-        $sTexto = "";
+//     private function evalExp3(&$result)
+//     {
+//         $op = '';
+//         $temp = 0.0;
 
-        if ($dCociente >= 100) {
-            $dNumero = $dCociente / 100;
-            $sNumero = (string) $dNumero;
-            $iNumero = (int) $sNumero[0];
-            $sTexto .= $this->sCentenas[$iNumero] . " ";
-        }
+//         $this->evalExp4($result);
 
-        $dCociente = fmod($dCociente, 100);
-        if ($dCociente >= 30) {
-            $dNumero = $dCociente / 10;
-            $sNumero = (string) $dNumero;
-            $iNumero = (int) $sNumero[0];
-            if ($iNumero > 0) {
-                $sTexto .= $this->sDecenas[$iNumero] . " ";
-            }
+//         while ($this->token === "*" || $this->token === "/" || $this->token === "%") {
+//             $op = $this->token[0];
+//             $this->ObtToken();
+//             $this->evalExp4($temp);
 
-            $dNumero = fmod($dCociente, 10);
-            $sNumero = (string) $dNumero;
-            $iNumero = (int) $sNumero[0];
-            if ($iNumero > 0) {
-                $sTexto .= "y " . $this->sUnidades[$iNumero] . " ";
-            }
-        } else {
-            $dNumero = $dCociente;
-            $sNumero = (string) $dNumero;
+//             switch ($op) {
+//                 case '*':
+//                     $result *= $temp;
+//                     break;
+//                 case '/':
+//                     if ($temp == 0.0) {
+//                         throw new Exception("evalExp3 : " . TiposError::DivisionPorCero . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
+//                     } else {
+//                         $result /= $temp;
+//                     }
+//                     break;
+//                 case '%':
+//                     $result = (int) $result % (int) $temp;
+//                     break;
+//             }
+//         }
+//     }
 
-            if (strlen($sNumero) > 1) {
-                if ($sNumero[1] != '.' && $sNumero[1] != ',') {
-                    $iNumero = (int) $sNumero[0] . $sNumero[1];
-                } else {
-                    $iNumero = (int) $sNumero[0];
-                }
-            } else {
-                $iNumero = (int) $sNumero[0];
-            }
-            $sTexto .= $this->sUnidades[$iNumero] . " ";
-        }
+//     private function evalExp4(&$result)
+//     {
+//         $temp = 0.0;
+//         $ex = 0.0;
+//         $t = 0;
 
-        return $sTexto;
-    }
+//         $this->evalExp5($result);
 
-    private function obtenerDecimales($sNumero)
-    {
-        $sNumPuntos = explode('.', $sNumero);
-        $sTexto = "";
-        $dNumero = 0;
+//         if ($this->token === "^") {
+//             $this->ObtToken();
+//             $this->evalExp4($temp);
+//             $ex = $result;
 
-        $dNumero = (double) $sNumPuntos[1];
-        $sTexto = "punto " . $this->numeros($dNumero, 1);
+//             if ($temp == 0.0) {
+//                 $result = 1.0;
+//                 return;
+//             }
 
-        return $sTexto;
-    }
-}
+//             for ($t = (int) $temp - 1; $t > 0; --$t) {
+//                 $result *= $ex;
+//             }
+//         }
+//     }
 
-class EvalExpMatematicas
-{
-    const Delimitadores = "+-*/%^=()";
+//     private function evalExp5(&$result)
+//     {
+//         $operacion = '';
 
-    private $exp;
-    private $lenghtExp;
-    private $indice;
-    private $token;
-    private TipoToken $tipoTok;
-    public $listaVar;
+//         if ($this->tipoTok === TipoToken::Delimitador && ($this->token === "+" || $this->token === "-")) {
+//             $operacion = $this->token;
+//             $this->ObtToken();
+//         }
 
-    public function __construct()
-    {
-        $this->listaVar = array("res" => 0.0);
-    }
+//         $this->evalExp6($result);
 
-    public function Analizar($exp)
-    {
-        $result = 0.0;
-        $this->exp = $exp;
-        $this->lenghtExp = strlen($exp);
-        $this->indice = 0;
+//         if ($operacion === "-") {
+//             $result = -($result);
+//         }
+//     }
 
-        $this->ObtToken();
+//     private function evalExp6(&$result)
+//     {
+//         if ($this->token === "(") {
+//             $this->ObtToken();
+//             $this->evalExp2($result);
 
-        if ($this->token == '') {
-            throw new Exception("EvalExp: " . TiposError::SinExpresion . " " . $this->token);
-        }
+//             if ($this->token !== ")") {
+//                 throw new Exception("evalExp6 : " . TiposError::Parentesis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
+//             }
 
-        $this->evalExp1($result);
+//             $this->ObtToken();
+//         } elseif ($this->token !== ")") {
+//             $this->Atomo($result);
+//         } else {
+//             $this->indice++;
+//         }
+//     }
 
-        if ($this->token != '' || $this->indice != $this->lenghtExp) {
-            throw new Exception("EvalExp :" . TiposError::Sintaxis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
-        }
+//     private function Atomo(&$result)
+//     {
+//         switch ($this->tipoTok) {
+//             case self::Identificador:
+//                 if (array_key_exists($this->token, $this->listaVar)) {
+//                     $result = (double) $this->listaVar[$this->token];
+//                     $this->ObtToken();
+//                 } else {
+//                     throw new Exception("Atomo : " . TiposError::Identificador . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
+//                 }
+//                 break;
+//             case self::Numero:
+//                 try {
+//                     $result = doubleval($this->token);
+//                 } catch (Exception $e) {
+//                     throw new Exception("Atomo : " . TiposError::Sintaxis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
+//                 }
+//                 $this->ObtToken();
+//                 break;
+//             default:
+//                 throw new Exception("Atomo : " . TiposError::Sintaxis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
+//         }
+//     }
 
-        $this->listaVar["res"] = $result;
-        return $result;
-    }
+//     private function ObtToken()
+//     {
+//         $temp = '';
 
-    private function evalExp1(&$result)
-    {
-        $token = $this->token;
-        $tipoTok = $this->tipoTok;
-        $prog = $this->indice;
+//         $this->tipoTok = TipoToken::Nulo;
+//         $this->token = '';
 
-        $this->ObtToken();
+//         while ($this->indice < $this->lenghtExp && ctype_space($this->exp[$this->indice])) {
+//             $this->indice++;
+//         }
 
-        if ($token !== "=") {
-            $this->token = $token;
-            $this->tipoTok = $tipoTok;
-            $this->indice = $prog;
-        } else {
-            $this->ObtToken();
-            $this->evalExp1($result);
-            if (array_key_exists($token, $this->listaVar)) {
-                $this->listaVar[$token] = $result;
-            } else {
-                $this->listaVar[$token] = $result;
-            }
-            return;
-        }
-        $this->evalExp2($result);
-    }
+//         if ($this->indice >= $this->lenghtExp) {
+//             return;
+//         }
 
-    private function evalExp2(&$result)
-    {
-        $op = '';
-        $temp = 0.0;
+//         if (strpos(Delimitadores, $this->exp[$this->indice]) !== false) {
+//             $this->tipoTok = TipoToken::Delimitador;
+//             $temp .= $this->exp[$this->indice++];
+//         } elseif (ctype_alpha($this->exp[$this->indice])) {
+//             while ($this->indice < $this->lenghtExp && (ctype_alpha($this->exp[$this->indice]) || ctype_digit($this->exp[$this->indice]))) {
+//                 $temp .= $this->exp[$this->indice++];
+//             }
+//             $this->tipoTok = TipoToken::Identificador;
+//         } elseif (ctype_digit($this->exp[$this->indice])) {
+//             while ($this->indice < $this->lenghtExp && (ctype_digit($this->exp[$this->indice]) || ($this->exp[$this->indice] === '.') || ($this->exp[$this->indice] === ','))) {
+//                 $temp .= $this->exp[$this->indice++];
+//             }
+//             $this->tipoTok = TipoToken::Numero;
+//         }
 
-        $this->evalExp3($result);
-
-        while ($this->token === "+" || $this->token === "-") {
-            $op = $this->token[0];
-            $this->ObtToken();
-            $this->evalExp3($temp);
-
-            switch ($op) {
-                case '+':
-                    $result += $temp;
-                    break;
-                case '-':
-                    $result -= $temp;
-                    break;
-            }
-        }
-    }
-
-    private function evalExp3(&$result)
-    {
-        $op = '';
-        $temp = 0.0;
-
-        $this->evalExp4($result);
-
-        while ($this->token === "*" || $this->token === "/" || $this->token === "%") {
-            $op = $this->token[0];
-            $this->ObtToken();
-            $this->evalExp4($temp);
-
-            switch ($op) {
-                case '*':
-                    $result *= $temp;
-                    break;
-                case '/':
-                    if ($temp == 0.0) {
-                        throw new Exception("evalExp3 : " . TiposError::DivisionPorCero . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
-                    } else {
-                        $result /= $temp;
-                    }
-                    break;
-                case '%':
-                    $result = (int) $result % (int) $temp;
-                    break;
-            }
-        }
-    }
-
-    private function evalExp4(&$result)
-    {
-        $temp = 0.0;
-        $ex = 0.0;
-        $t = 0;
-
-        $this->evalExp5($result);
-
-        if ($this->token === "^") {
-            $this->ObtToken();
-            $this->evalExp4($temp);
-            $ex = $result;
-
-            if ($temp == 0.0) {
-                $result = 1.0;
-                return;
-            }
-
-            for ($t = (int) $temp - 1; $t > 0; --$t) {
-                $result *= $ex;
-            }
-        }
-    }
-
-    private function evalExp5(&$result)
-    {
-        $operacion = '';
-
-        if ($this->tipoTok === TipoToken::Delimitador && ($this->token === "+" || $this->token === "-")) {
-            $operacion = $this->token;
-            $this->ObtToken();
-        }
-
-        $this->evalExp6($result);
-
-        if ($operacion === "-") {
-            $result = -($result);
-        }
-    }
-
-    private function evalExp6(&$result)
-    {
-        if ($this->token === "(") {
-            $this->ObtToken();
-            $this->evalExp2($result);
-
-            if ($this->token !== ")") {
-                throw new Exception("evalExp6 : " . TiposError::Parentesis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
-            }
-
-            $this->ObtToken();
-        } elseif ($this->token !== ")") {
-            $this->Atomo($result);
-        } else {
-            $this->indice++;
-        }
-    }
-
-    private function Atomo(&$result)
-    {
-        switch ($this->tipoTok) {
-            case self::Identificador:
-                if (array_key_exists($this->token, $this->listaVar)) {
-                    $result = (double) $this->listaVar[$this->token];
-                    $this->ObtToken();
-                } else {
-                    throw new Exception("Atomo : " . TiposError::Identificador . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
-                }
-                break;
-            case self::Numero:
-                try {
-                    $result = doubleval($this->token);
-                } catch (Exception $e) {
-                    throw new Exception("Atomo : " . TiposError::Sintaxis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
-                }
-                $this->ObtToken();
-                break;
-            default:
-                throw new Exception("Atomo : " . TiposError::Sintaxis . " TOKEN(" . $this->token . ";" . $this->tipoTok . ")");
-        }
-    }
-
-    private function ObtToken()
-    {
-        $temp = '';
-
-        $this->tipoTok = TipoToken::Nulo;
-        $this->token = '';
-
-        while ($this->indice < $this->lenghtExp && ctype_space($this->exp[$this->indice])) {
-            $this->indice++;
-        }
-
-        if ($this->indice >= $this->lenghtExp) {
-            return;
-        }
-
-        if (strpos(Delimitadores, $this->exp[$this->indice]) !== false) {
-            $this->tipoTok = TipoToken::Delimitador;
-            $temp .= $this->exp[$this->indice++];
-        } elseif (ctype_alpha($this->exp[$this->indice])) {
-            while ($this->indice < $this->lenghtExp && (ctype_alpha($this->exp[$this->indice]) || ctype_digit($this->exp[$this->indice]))) {
-                $temp .= $this->exp[$this->indice++];
-            }
-            $this->tipoTok = TipoToken::Identificador;
-        } elseif (ctype_digit($this->exp[$this->indice])) {
-            while ($this->indice < $this->lenghtExp && (ctype_digit($this->exp[$this->indice]) || ($this->exp[$this->indice] === '.') || ($this->exp[$this->indice] === ','))) {
-                $temp .= $this->exp[$this->indice++];
-            }
-            $this->tipoTok = TipoToken::Numero;
-        }
-
-        $this->token = $temp;
-    }
-}
+//         $this->token = $temp;
+//     }
+// }
 
 
