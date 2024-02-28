@@ -11,7 +11,7 @@ class libreria
 
     public static function myEmpresa()
     {
-        return 'Softdin';
+        return 'Bienvenidos a Softdin';
     }
 
     public static function existeCaracter($cadena, $arreglo)
