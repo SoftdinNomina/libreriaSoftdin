@@ -5,6 +5,11 @@ namespace softdin\servicio;
 use Exception;
 use Carbon\Carbon;
 use DateTime;
+use softdin\servicio\Enum\EnumNE_TipoContrato;
+use softdin\servicio\Enum\EnumNE_TipoDocumento;
+use softdin\servicio\Enum\EnumTipoContrato;
+use softdin\servicio\Enum\EnumTipoIdentificacion;
+use softdin\servicio\Enum\EnumTipoPago;
 
 class libreria
 {
