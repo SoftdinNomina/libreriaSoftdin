@@ -16,13 +16,13 @@ class EnumDiasSemana
     const DOMINGO = 7;
 
     private static $descriptions = [
-        ['id' => self::LUNES, 'code' => 'LUN', 'description' => 'LUNES'],
-        ['id' => self::MARTES, 'code' => 'MAR', 'description' => 'MARTES'],
-        ['id' => self::MIERCOLES, 'code' => 'MIE', 'description' => 'MIÉRCOLES'],
-        ['id' => self::JUEVES, 'code' => 'JUE', 'description' => 'JUEVES'],
-        ['id' => self::VIERNES, 'code' => 'VIE', 'description' => 'VIERNES'],
-        ['id' => self::SABADO, 'code' => 'SAB', 'description' => 'SÁBADO'],
-        ['id' => self::DOMINGO, 'code' => 'DOM', 'description' => 'DOMINGO'],
+        ['id' => self::LUNES, 'code' => 'LUNES', 'description' => 'Lunes'],
+        ['id' => self::MARTES, 'code' => 'MARTES', 'description' => 'Martes'],
+        ['id' => self::MIERCOLES, 'code' => 'MIERCOLES', 'description' => 'Miercoles'],
+        ['id' => self::JUEVES, 'code' => 'JUEVES', 'description' => 'Jueves'],
+        ['id' => self::VIERNES, 'code' => 'VIERNES', 'description' => 'Viernes'],
+        ['id' => self::SABADO, 'code' => 'SABADO', 'description' => 'Sabado'],
+        ['id' => self::DOMINGO, 'code' => 'DOMINGO', 'description' => 'Domingo'],
     ];
 
     public static function getCollection()

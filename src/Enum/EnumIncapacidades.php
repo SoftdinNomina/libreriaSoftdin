@@ -13,9 +13,9 @@ class EnumIncapacidades
     const LMA_LicenciaMaternidad = EnumVariablesSistema::LMA_LicenciaMaternidad;
 
     private static $descriptions = [
-        ["id" => self::IGE_IncapacidadGeneral, "code" => "IGE", "description" => "Incapacidad General por Enfermedad"],
-        ["id" => self::IRP_IncapacidadAccidenteTrabajo, "code" => "IRP", "description" => "Incapacidad por Riesgo Profesional"],
-        ["id" => self::LMA_LicenciaMaternidad, "code" => "LMA", "description" => "Licencia de Maternidad"],
+        ["id" => self::IGE_IncapacidadGeneral, "code" => "IGE_IncapacidadGeneral", "description" => EnumVariablesSistema::getById(EnumVariablesSistema::IGE_IncapacidadGeneral)->description],
+        ["id" => self::IRP_IncapacidadAccidenteTrabajo, "code" => "IRP_IncapacidadAccidenteTrabajo", "description" => EnumVariablesSistema::getById(EnumVariablesSistema::IRP_IncapacidadAccidenteTrabajo)->description],
+        ["id" => self::LMA_LicenciaMaternidad, "code" => "LMA_LicenciaMaternidad", "description" => EnumVariablesSistema::getById(EnumVariablesSistema::LMA_LicenciaMaternidad)->description],
     ];
 
     public static function getCollection()

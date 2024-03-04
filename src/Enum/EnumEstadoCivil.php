@@ -16,13 +16,13 @@ class EnumEstadoCivil
     const noDefinico = 0;
 
     private static $descriptions = [
-        ['id' => self::SOLTERO, 'code' => 'SOL', 'description' => 'SOLTERO(A)'],
-        ['id' => self::CASADO, 'code' => 'CAS', 'description' => 'CASADO(A)'],
-        ['id' => self::DIVORCIADO, 'code' => 'DIV', 'description' => 'DIVORCIADO(A)'],
-        ['id' => self::SEPARADO, 'code' => 'SEP', 'description' => 'SEPARADO(A)'],
-        ['id' => self::VIUDO, 'code' => 'VIU', 'description' => 'VIUDO(A)'],
-        ['id' => self::UNION_LIBRE, 'code' => 'ULI', 'description' => 'UNION LIBRE'],
-        ['id' => self::NO_DEFINIDO, 'code' => 'NDF', 'description' => 'NO DEFINIDO'],
+        ['id' => self::SOLTERO, 'code' => 'SOLTERO', 'description' => 'Soltero(A)'],
+        ['id' => self::CASADO, 'code' => 'CASADO', 'description' => 'Casado(A)'],
+        ['id' => self::DIVORCIADO, 'code' => 'DIVORCIADO', 'description' => 'Divorciado(A)'],
+        ['id' => self::SEPARADO, 'code' => 'SEPARADO', 'description' => 'Separado(A)'],
+        ['id' => self::VIUDO, 'code' => 'VIUDO', 'description' => 'Viudo(A)'],
+        ['id' => self::UNION_LIBRE, 'code' => 'UNION_LIBRE', 'description' => 'Union Libre'],
+        ['id' => self::NO_DEFINIDO, 'code' => 'NO_DEFINIDO', 'description' => 'NO Definido'],
     ];
 
     public static function getCollection()

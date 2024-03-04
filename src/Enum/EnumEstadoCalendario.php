@@ -10,16 +10,30 @@ class EnumEstadoCalendario
     const NORMAL = 1;
     const FERIADO = 2;
 
-    public static function getDescription($value)
+    private static $descriptions = [
+        ['id' => self::NORMAL, 'code' => 'NORMAL', 'description' => 'Normal'],
+        ['id' => self::FERIADO, 'code' => 'FERIADO', 'description' => 'Feriado'],
+    ];
+
+    public static function getCollection()
     {
-        switch ($value) {
-            case self::NORMAL:
-                return 'NORMAL';
-            case self::FERIADO:
-                return 'FERIADO';
-            default:
-                return '';
-        }
+        return collect(self::$descriptions);
     }
-    
+
+    public static function getById($id)
+    {
+        return self::getCollection()->firstWhere('id', $id) ?? null;
+    }
+
+    public static function getAll()
+    {
+        return self::$descriptions;
+    }
+
+    public static function getByDescription($description)
+    {
+        return self::getCollection()->firstWhere('description', $description) ?? null;
+    }
+
+
 }
