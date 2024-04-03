@@ -25,7 +25,7 @@ class EnumTipoIdentificacion
         ['id' => self::CE, 'code' => 'CE', 'description' => "Cedula de Extranjería"],
         ['id' => self::PA, 'code' => 'PA', 'description' => "Pasaporte"],
         ['id' => self::NI, 'code' => 'NI', 'description' => "Numero de Identificación Tributaria NIT"],
-        ['id' => self::CD, 'code' => 'CD', 'description' => "Carne Diplomático"],
+        ['id' => self::CD, 'code' => 'CD', 'description' => "Carnet Diplomático"],
         ['id' => self::SC, 'code' => 'SC', 'description' => "Salvoconducto de permanencia"],
         ['id' => self::NIO, 'code' => 'NIO', 'description' => "Numero de Identificación Tributaria NIT Entidad Oficial"]
     ];
