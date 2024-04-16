@@ -7,13 +7,13 @@ use Illuminate\Support\Collection;
 
 class EnumEstadoCivil
 {
-    const soltero = 1;
-    const casado = 2;
-    const divorcio = 3;
-    const separado = 4;
-    const viudo = 5;
-    const unionLibre = 6;
-    const noDefinico = 0;
+    const SOLTERO = 1;
+    const CASADO = 2;
+    const DIVORCIADO = 3;
+    const SEPARADO = 4;
+    const VIUDO = 5;
+    const UNION_LIBRE = 6;
+    const NO_DEFINIDO = 0;
 
     private static $descriptions = [
         ['id' => self::SOLTERO, 'code' => 'SOLTERO', 'description' => 'Soltero(A)'],
