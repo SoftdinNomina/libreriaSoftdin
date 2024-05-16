@@ -10,7 +10,7 @@ class EnumStatusWeb
     public const INICIO = 1;
     public const PROCESO = 2;
     public const APROBADO = 3;
-    public const ANULADO = 3;
+    public const ANULADO = 4;
 
     private static $descriptions = [
         ['id' => self::INICIO, 'code' => 'INICIO', 'description' => 'Inicio'],
