@@ -31,25 +31,24 @@ class EnumStatusWeb
     }
 
     private static $colorMapping = [
-        'primary' => 'Inicio',
-        'warning' => 'Proceso',
-        'success' => 'Aprobado',
-        'danger' => 'Anulado', // Default color for unknown states
+        'primary' => self::INICIO,
+        'warning' => self::PROCESO,
+        'success' => self::APROBADO,
+        'danger' => self::ANULADO, // Default color for unknown states
     ];
 
-    public static function getColor($campo)
+    public static function getColor($campo):array
     {
         $colorArray = [];
 
         foreach (self::$colorMapping as $color => $description) {
-            $descriptionEntry = array_filter(self::$descriptions, fn($item) => $item['description'] === $description);
+            $descriptionEntry = array_filter(self::$descriptions, fn($item) => $item['id'] === $description);
             if (!empty($descriptionEntry)) {
-                $colorArray[$color] = $descriptionEntry[$campo];
+                $colorArray[$color] = array_shift($descriptionEntry)[$campo];
             } else {
                 $colorArray[$color] = null; // Manejar el caso en que el campo no exista
             }
         }
-
         return $colorArray;
     }
 

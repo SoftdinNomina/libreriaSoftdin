@@ -35,5 +35,25 @@ class EnumEstadoCalendario
         return self::getCollection()->firstWhere('description', $description) ?? null;
     }
 
+    private static $colorMapping = [
+        'primary' => self::NORMAL,
+        'danger' => self::FERIADO, // Default color for unknown states
+    ];
+
+    public static function getColor($campo): array
+    {
+        $colorArray = [];
+
+        foreach (self::$colorMapping as $color => $description) {
+            $descriptionEntry = array_filter(self::$descriptions, fn($item) => $item['id'] === $description);
+            if (!empty($descriptionEntry)) {
+                $colorArray[$color] = array_shift($descriptionEntry)[$campo];
+            } else {
+                $colorArray[$color] = null; // Manejar el caso en que el campo no exista
+            }
+        }
+        return $colorArray;
+    }
+
 
 }

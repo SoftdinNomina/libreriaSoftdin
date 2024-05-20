@@ -25,6 +25,31 @@ class EnumEstadoCivil
         ['id' => self::NO_DEFINIDO, 'code' => 'NO_DEFINIDO', 'description' => 'NO Definido'],
     ];
 
+    private static $colorMapping = [
+        'primary' => self::SOLTERO,
+        'warning' => self::CASADO,
+        'success' => self::DIVORCIADO,
+        'indigo' => self::SEPARADO,
+        'fuchsia' => self::VIUDO,
+        'emerald' => self::UNION_LIBRE,
+        'danger' => self::NO_DEFINIDO, // Default color for unknown states
+    ];
+
+    public static function getColor($campo): array
+    {
+        $colorArray = [];
+
+        foreach (self::$colorMapping as $color => $description) {
+            $descriptionEntry = array_filter(self::$descriptions, fn($item) => $item['id'] === $description);
+            if (!empty($descriptionEntry)) {
+                $colorArray[$color] = array_shift($descriptionEntry)[$campo];
+            } else {
+                $colorArray[$color] = null; // Manejar el caso en que el campo no exista
+            }
+        }
+        return $colorArray;
+    }
+
     public static function getCollection()
     {
         return collect(self::$descriptions);
