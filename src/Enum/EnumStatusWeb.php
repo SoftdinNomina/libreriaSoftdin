@@ -30,6 +30,29 @@ class EnumStatusWeb
         return self::getCollection()->firstWhere('id', $id) ?? null;
     }
 
+    private static $colorMapping = [
+        'primary' => 'Inicio',
+        'warning' => 'Proceso',
+        'success' => 'Aprobado',
+        'danger' => 'Anulado', // Default color for unknown states
+    ];
+
+    public static function getColor($campo)
+    {
+        $colorArray = [];
+
+        foreach (self::$colorMapping as $color => $description) {
+            $descriptionEntry = array_filter(self::$descriptions, fn($item) => $item['description'] === $description);
+            if (!empty($descriptionEntry)) {
+                $colorArray[$color] = $descriptionEntry[$campo];
+            } else {
+                $colorArray[$color] = null; // Manejar el caso en que el campo no exista
+            }
+        }
+
+        return $colorArray;
+    }
+
     public static function getAll()
     {
         return self::$descriptions;
