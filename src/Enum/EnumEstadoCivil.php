@@ -35,7 +35,7 @@ class EnumEstadoCivil
         'danger' => self::NO_DEFINIDO, // Default color for unknown states
     ];
 
-    public static function getColor($campo): array
+    public static function getColors($campo): array
     {
         $colorArray = [];
 
@@ -69,6 +69,13 @@ class EnumEstadoCivil
     {
         return self::getCollection()->firstWhere('description', $description) ?? null;
     }
+
+    public static function getColorName($campo, $valor)
+    {
+        $colors = self::getColors($campo);
+        return array_search($valor, $colors);
+    }
+
 
 }
 

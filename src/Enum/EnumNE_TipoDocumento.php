@@ -53,22 +53,22 @@ class EnumNE_TipoDocumento
         return self::getCollection()->firstWhere('description', $description) ?? null;
     }
 
-    public static function NE_TipoContrato(EnumTipoContrato $tipocontrato)
-    {
-        $mapeo = [
-            EnumTipoContrato::FIJO => EnumNE_TipoContrato::Termino_Fijo,
-            EnumTipoContrato::INDEFINIDO => EnumNE_TipoContrato::Termino_Indefinido,
-            EnumTipoContrato::OBRA_LABOR => EnumNE_TipoContrato::Obra_Labor,
-            EnumTipoContrato::APRENDIZAJE => EnumNE_TipoContrato::Aprendizaje,
-            EnumTipoContrato::PRACTICAS_PASANTIAS => EnumNE_TipoContrato::Practicas_Pasantias,
-        ];
+    // public static function NE_TipoContrato(EnumTipoContrato $tipocontrato)
+    // {
+    //     $mapeo = [
+    //         EnumTipoContrato::FIJO => EnumNE_TipoContrato::Termino_Fijo,
+    //         EnumTipoContrato::INDEFINIDO => EnumNE_TipoContrato::Termino_Indefinido,
+    //         EnumTipoContrato::OBRA_LABOR => EnumNE_TipoContrato::Obra_Labor,
+    //         EnumTipoContrato::APRENDIZAJE => EnumNE_TipoContrato::Aprendizaje,
+    //         EnumTipoContrato::PRACTICAS_PASANTIAS => EnumNE_TipoContrato::Practicas_Pasantias,
+    //     ];
 
-        if (array_key_exists($tipocontrato, $mapeo)) {
-            return $mapeo[$tipocontrato];
-        } else {
-            throw new \InvalidArgumentException("Tipo de contrato no implementado: $tipocontrato");
-        }
-    }
+    //     if (array_key_exists($tipocontrato, $mapeo)) {
+    //         return $mapeo[$tipocontrato];
+    //     } else {
+    //         throw new \InvalidArgumentException("Tipo de contrato no implementado: $tipocontrato");
+    //     }
+    // }
 
 
 }

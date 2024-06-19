@@ -37,7 +37,7 @@ class EnumStatusWeb
         'danger' => self::ANULADO, // Default color for unknown states
     ];
 
-    public static function getColor($campo):array
+    public static function getColors($campo):array
     {
         $colorArray = [];
 
@@ -61,5 +61,12 @@ class EnumStatusWeb
     {
         return self::getCollection()->firstWhere('description', $description) ?? null;
     }
+
+    public static function getColorName($campo, $valor)
+    {
+        $colors = self::getColors($campo);
+        return array_search($valor, $colors);
+    }
+
 
 }

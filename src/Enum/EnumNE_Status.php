@@ -30,7 +30,7 @@ class EnumNE_Status
         'lime' => self::Erroneas, // Default color for unknown states
     ];
 
-    public static function getColor($campo): array
+    public static function getColors($campo): array
     {
         $colorArray = [];
 
@@ -64,6 +64,12 @@ class EnumNE_Status
     public static function getByDescription($description)
     {
         return self::getCollection()->firstWhere('description', $description) ?? null;
+    }
+
+    public static function getColorName($campo, $valor)
+    {
+        $colors = self::getColors($campo);
+        return array_search($valor, $colors);
     }
 
 }
