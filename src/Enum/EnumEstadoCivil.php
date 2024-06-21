@@ -16,13 +16,13 @@ class EnumEstadoCivil
     const NO_DEFINIDO = 0;
 
     private static $descriptions = [
-        ['id' => self::SOLTERO, 'code' => 'SOLTERO', 'description' => 'Soltero(A)'],
-        ['id' => self::CASADO, 'code' => 'CASADO', 'description' => 'Casado(A)'],
-        ['id' => self::DIVORCIADO, 'code' => 'DIVORCIADO', 'description' => 'Divorciado(A)'],
-        ['id' => self::SEPARADO, 'code' => 'SEPARADO', 'description' => 'Separado(A)'],
-        ['id' => self::VIUDO, 'code' => 'VIUDO', 'description' => 'Viudo(A)'],
-        ['id' => self::UNION_LIBRE, 'code' => 'UNION_LIBRE', 'description' => 'Union Libre'],
-        ['id' => self::NO_DEFINIDO, 'code' => 'NO_DEFINIDO', 'description' => 'NO Definido'],
+        ['id' => self::SOLTERO, 'code' => 'SOLTERO', 'description' => 'Soltero(A)', 'descriptionInles' => 'Single'],
+        ['id' => self::CASADO, 'code' => 'CASADO', 'description' => 'Casado(A)', 'descriptionInles' => 'Married'],
+        ['id' => self::DIVORCIADO, 'code' => 'DIVORCIADO', 'description' => 'Divorciado(A)', 'descriptionInles' => 'Divorced'],
+        ['id' => self::SEPARADO, 'code' => 'SEPARADO', 'description' => 'Separado(A)', 'descriptionInles' => 'Separated'],
+        ['id' => self::VIUDO, 'code' => 'VIUDO', 'description' => 'Viudo(A)', 'descriptionInles' => 'Widowed'],
+        ['id' => self::UNION_LIBRE, 'code' => 'UNION_LIBRE', 'description' => 'Union Libre', 'descriptionInles' => 'Common-law'],
+        ['id' => self::NO_DEFINIDO, 'code' => 'NO_DEFINIDO', 'description' => 'NO Definido', 'descriptionInles' => 'Not Defined'],
     ];
 
     private static $colorMapping = [

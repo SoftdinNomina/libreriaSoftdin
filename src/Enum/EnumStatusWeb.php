@@ -13,10 +13,10 @@ class EnumStatusWeb
     public const ANULADO = 4;
 
     private static $descriptions = [
-        ['id' => self::INICIO, 'code' => 'INICIO', 'description' => 'Inicio'],
-        ['id' => self::PROCESO, 'code' => 'PROCESO', 'description' => 'Proceso'],
-        ['id' => self::APROBADO, 'code' => 'APROBADO', 'description' => 'Aprobado'],
-        ['id' => self::ANULADO, 'code' => 'ANULADO', 'description' => 'Anulado'],
+        ['id' => self::INICIO, 'code' => 'INICIO', 'description' => 'Inicio', 'descriptionIngles' => 'Star'],
+        ['id' => self::PROCESO, 'code' => 'PROCESO', 'description' => 'Proceso', 'descriptionIngles' => 'Process'],
+        ['id' => self::APROBADO, 'code' => 'APROBADO', 'description' => 'Aprobado', 'descriptionIngles' => 'Approved'],
+        ['id' => self::ANULADO, 'code' => 'ANULADO', 'description' => 'Anulado', 'descriptionIngles' => 'Annulled'],
     ];
 
 

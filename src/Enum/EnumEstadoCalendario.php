@@ -11,8 +11,8 @@ class EnumEstadoCalendario
     const FERIADO = 2;
 
     private static $descriptions = [
-        ['id' => self::NORMAL, 'code' => 'NORMAL', 'description' => 'Normal'],
-        ['id' => self::FERIADO, 'code' => 'FERIADO', 'description' => 'Feriado'],
+        ['id' => self::NORMAL, 'code' => 'NORMAL', 'description' => 'Normal', 'descriptionIngles' => 'Normal'],
+        ['id' => self::FERIADO, 'code' => 'FERIADO', 'description' => 'Feriado', 'descriptionIngles' => 'Holiday'],
     ];
 
     public static function getCollection()

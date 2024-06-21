@@ -15,11 +15,11 @@ class EnumNE_Status
     public const Aceptadas = 5;
 
     private static $descriptions = [
-        ['id' => self::Validas, 'code' => 'VAL', 'description' => 'Válidas'],
-        ['id' => self::Pendientes, 'code' => 'PEN', 'description' => 'Pendientes'],
-        ['id' => self::Erroneas, 'code' => 'ERR', 'description' => 'Erróneas'],
-        ['id' => self::Rechazadas, 'code' => 'REC', 'description' => 'Rechazadas'],
-        ['id' => self::Aceptadas, 'code' => 'ACE', 'description' => 'Aceptadas'],
+        ['id' => self::Validas, 'code' => 'VAL', 'description' => 'Válidas', 'descriptionIngles' => 'Valid'],
+        ['id' => self::Pendientes, 'code' => 'PEN', 'description' => 'Pendientes', 'descriptionIngles' => 'Pending'],
+        ['id' => self::Erroneas, 'code' => 'ERR', 'description' => 'Erróneas', 'descriptionIngles' => 'Erroneous'],
+        ['id' => self::Rechazadas, 'code' => 'REC', 'description' => 'Rechazadas', 'descriptionIngles' => 'Rejected'],
+        ['id' => self::Aceptadas, 'code' => 'ACE', 'description' => 'Aceptadas', 'descriptionIngles' => 'Accepted'],
     ];
 
     private static $colorMapping = [
