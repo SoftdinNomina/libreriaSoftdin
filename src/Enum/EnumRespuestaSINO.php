@@ -30,10 +30,36 @@ class EnumRespuestaSINO
     {
         return self::$descriptions;
     }
-
+ 
     public static function getByDescription($description)
     {
         return self::getCollection()->firstWhere('description', $description) ?? null;
+    }
+
+    private static $colorMapping = [
+        'success' => self::SI,
+        'danger' => self::NO, // Default color for unknown states
+    ];
+
+    public static function getColors($campo): array
+    {
+        $colorArray = [];
+
+        foreach (self::$colorMapping as $color => $description) {
+            $descriptionEntry = array_filter(self::$descriptions, fn($item) => $item['id'] === $description);
+            if (!empty($descriptionEntry)) {
+                $colorArray[$color] = array_shift($descriptionEntry)[$campo];
+            } else {
+                $colorArray[$color] = null; // Manejar el caso en que el campo no exista
+            }
+        }
+        return $colorArray;
+    }
+
+    public static function getColorName($campo, $valor)
+    {
+        $colors = self::getColors($campo);
+        return array_search($valor, $colors);
     }
 
 }
