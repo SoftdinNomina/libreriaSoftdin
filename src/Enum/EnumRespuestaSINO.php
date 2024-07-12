@@ -12,8 +12,8 @@ class EnumRespuestaSINO
     public const NO = 0;
 
     private static $descriptions = [
-        ['id' => self::SI, 'code' => 'SI', 'description' => 'Sí'],
-        ['id' => self::NO, 'code' => 'NO', 'description' => 'No'],
+        ['id' => self::SI, 'code' => 'SI', 'description' => 'Sí', 'description2' => true],
+        ['id' => self::NO, 'code' => 'NO', 'description' => 'No', 'description2' => false],
     ];
 
     public static function getCollection()
