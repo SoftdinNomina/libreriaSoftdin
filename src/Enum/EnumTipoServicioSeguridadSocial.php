@@ -9,7 +9,7 @@ class EnumTipoServicioSeguridadSocial
 {
     const EPS = 1;
     const AFP = 2;
-    const ARP = 3;
+    const ARL = 3;
     const CCF = 4;
     const SENA = 5;
     const ICBF = 6;
@@ -20,7 +20,7 @@ class EnumTipoServicioSeguridadSocial
     private static $descriptions = [
         ['id' => self::EPS, 'code' => 'EPS', 'description' => "EPS"],
         ['id' => self::AFP, 'code' => 'AFP', 'description' => "AFP"],
-        ['id' => self::ARP, 'code' => 'ARP', 'description' => "ARP"],
+        ['id' => self::ARL, 'code' => 'ARL', 'description' => "ARL"],
         ['id' => self::CCF, 'code' => 'CCF', 'description' => "CCF"],
         ['id' => self::SENA, 'code' => 'SENA', 'description' => "SENA"],
         ['id' => self::ICBF, 'code' => 'ICBF', 'description' => "ICBF"],

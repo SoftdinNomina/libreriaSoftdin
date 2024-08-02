@@ -11,7 +11,7 @@ class EnumModalidadEjecucionNomina
     public const DEDUCCION = 2;
     public const PROV_SEG = 3;
     public const PROV_PRF = 4;
-    public const PROV_ARP = 5;
+    public const PROV_ARL = 5;
     public const PROV_PRS = 6;
     public const VACACIONES = 7;
 
@@ -20,7 +20,7 @@ class EnumModalidadEjecucionNomina
         ['id' => self::DEDUCCION, 'code' => 'DEDUCCION', 'description' => 'Deducción'],
         ['id' => self::PROV_SEG, 'code' => 'PROV_SEG', 'description' => 'Provisión Seguridad Social'],
         ['id' => self::PROV_PRF, 'code' => 'PROV_PRF', 'description' => 'Provisión Parafiscales'],
-        ['id' => self::PROV_ARP, 'code' => 'PROV_ARP', 'description' => 'Provisión Riesgos Laborales'],
+        ['id' => self::PROV_ARL, 'code' => 'PROV_ARL', 'description' => 'Provisión Riesgos Laborales'],
         ['id' => self::PROV_PRS, 'code' => 'PROV_PRS', 'description' => 'Provisión Prestaciones Sociales'],
         ['id' => self::VACACIONES, 'code' => 'VACACIONES', 'description' => 'Vacaciones'],
     ];

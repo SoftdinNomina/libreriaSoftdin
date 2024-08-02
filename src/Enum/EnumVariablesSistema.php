@@ -10,7 +10,7 @@ class EnumVariablesSistema
     const AFC_Cuenta = 115;
     const Ahorro = 59;
     const Anticipo = 122;
-    const Aporte_ARP = 1;
+    const Aporte_ARL = 1;
     const Aporte_CCF = 2;
     const Aporte_Empleado_AFP = 3;
     const Aporte_Empleado_EPS = 4;
@@ -69,9 +69,9 @@ class EnumVariablesSistema
     const Liquidacion_Prima_Vacaciones = 101;
     const Liquidacion_Prima_Convencional = 102;
     const No_Aplicar_Tiempo = 95;
-    const Pago_IncapARP_ARP = 29;
+    const Pago_IncapARL_ARL = 29;
     const Pago_Tercero = 127;
-    const Pago_IncapARP_Patron = 30;
+    const Pago_IncapARL_Patron = 30;
     const Pago_IncapIGE_EPS = 31;
     const Pago_IncapIGE_Patron = 32;
     const Pago_IncapLMA_EPS = 33;
@@ -129,7 +129,7 @@ class EnumVariablesSistema
     const Cambio_Contrato = 69;
     const Cambio_CajaCompensacion = 70;
     const Cambio_FondoCesantias = 71;
-    const Cambio_PorcentajeARP = 73;
+    const Cambio_PorcentajeARL = 73;
     const Cambio_Extranjero = 75;
     const Cambio_ResideExterior = 76;
     const Cambio_ReteFuente = 97;
@@ -143,7 +143,7 @@ class EnumVariablesSistema
         ["id" => self::AFC_Cuenta, "code" => "AFC_Cuenta", "description" => "OTROS"],
         ["id" => self::Ahorro, "code" => "Ahorro", "description" => "OTROS"],
         ["id" => self::Anticipo, "code" => "Anticipo", "description" => "OTROS"],
-        ["id" => self::Aporte_ARP, "code" => "Aporte_ARP", "description" => "PROV_SEGSOC"],
+        ["id" => self::Aporte_ARL, "code" => "Aporte_ARL", "description" => "PROV_SEGSOC"],
         ["id" => self::Aporte_CCF, "code" => "Aporte_CCF", "description" => "PROV_SEGSOC"],
         ["id" => self::Aporte_Empleado_AFP, "code" => "Aporte_Empleado_AFP", "description" => "OTROS"],
         ["id" => self::Aporte_Empleado_EPS, "code" => "Aporte_Empleado_EPS", "description" => "OTROS"],
@@ -202,9 +202,9 @@ class EnumVariablesSistema
         ["id" => self::Liquidacion_Prima_Vacaciones, "code" => "Liquidacion_Prima_Vacaciones", "description" => "LIQUIDACION"],
         ["id" => self::Liquidacion_Prima_Convencional, "code" => "Liquidacion_Prima_Convencional", "description" => "LIQUIDACION"],
         ["id" => self::No_Aplicar_Tiempo, "code" => "No_Aplicar_Tiempo", "description" => "OTROS"],
-        ["id" => self::Pago_IncapARP_ARP, "code" => "Pago_IncapARP_ARP", "description" => "OTROS"],
+        ["id" => self::Pago_IncapARL_ARL, "code" => "Pago_IncapARL_ARL", "description" => "OTROS"],
         ["id" => self::Pago_Tercero, "code" => "Pago_Tercero", "description" => "OTROS"],
-        ["id" => self::Pago_IncapARP_Patron, "code" => "Pago_IncapARP_Patron", "description" => "OTROS"],
+        ["id" => self::Pago_IncapARL_Patron, "code" => "Pago_IncapARL_Patron", "description" => "OTROS"],
         ["id" => self::Pago_IncapIGE_EPS, "code" => "Pago_IncapIGE_EPS", "description" => "OTROS"],
         ["id" => self::Pago_IncapIGE_Patron, "code" => "Pago_IncapIGE_Patron", "description" => "OTROS"],
         ["id" => self::Pago_IncapLMA_EPS, "code" => "Pago_IncapLMA_EPS", "description" => "OTROS"],
@@ -264,7 +264,7 @@ class EnumVariablesSistema
         ["id" => self::Cambio_Contrato, "code" => "Cambio_Contrato", "description" => "CAMBIOS_C"],
         ["id" => self::Cambio_Extranjero, "code" => "Cambio_Extranjero", "description" => "CAMBIOS_C"],
         ["id" => self::Cambio_FondoCesantias, "code" => "Cambio_FondoCesantias", "description" => "CAMBIOS_C"],
-        ["id" => self::Cambio_PorcentajeARP, "code" => "Cambio_PorcentajeARP", "description" => "CAMBIOS_C"],
+        ["id" => self::Cambio_PorcentajeARL, "code" => "Cambio_PorcentajeARL", "description" => "CAMBIOS_C"],
         ["id" => self::Cambio_Cargo, "code" => "Cambio_Cargo", "description" => "CAMBIOS_C"],
         ["id" => self::Cambio_PoseeCuenta, "code" => "Cambio_PoseeCuenta", "description" => "CAMBIOS_C"],
         ["id" => self::Cambio_ResideExterior, "code" => "Cambio_ResideExterior", "description" => "CAMBIOS_C"],

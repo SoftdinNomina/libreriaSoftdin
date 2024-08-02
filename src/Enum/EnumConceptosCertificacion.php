@@ -40,7 +40,7 @@ class EnumConceptosCertificacion
     const DESCRIPCION_CONTRATO = 31;
     const PRESTACION_SERVICIO = 32;
     const MODALIDAD_CONTRATACION = 33;
-    const PORCENTAJE_ARP = 34;
+    const PORCENTAJE_ARL = 34;
     const CEDULA_REPRESENTANTE_LEGAL = 35;
     const CCF = 36;
     const FECHA_NACIMIENTO_LARGO = 37;
@@ -94,7 +94,7 @@ class EnumConceptosCertificacion
         ['id' => self::DESCRIPCION_CONTRATO, 'code' => "DESCRIPCION CONTRATO", 'description' => '<<31>>'],
         ['id' => self::PRESTACION_SERVICIO, 'code' => "PRESTACION SERVICIO", 'description' => '<<32>>'],
         ['id' => self::MODALIDAD_CONTRATACION, 'code' => "MODALIDAD CONTRATACION", 'description' => '<<33>>'],
-        ['id' => self::PORCENTAJE_ARP, 'code' => "PORCENTAJE ARP", 'description' => '<<34>>'],
+        ['id' => self::PORCENTAJE_ARL, 'code' => "PORCENTAJE ARL", 'description' => '<<34>>'],
         ['id' => self::CEDULA_REPRESENTANTE_LEGAL, 'code' => "CEDULA REPRESENTANTE LEGAL", 'description' => '<<35>>'],
         ['id' => self::CCF, 'code' => "CCF", 'description' => '<<36>>'],
         ['id' => self::FECHA_NACIMIENTO_LARGO, 'code' => "FECHA NACIMIENTO LARGO", 'description' => '<<37>>'],
