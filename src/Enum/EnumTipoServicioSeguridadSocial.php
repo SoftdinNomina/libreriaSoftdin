@@ -14,7 +14,7 @@ class EnumTipoServicioSeguridadSocial
     const SENA = 5;
     const ICBF = 6;
     const ESAP = 7;
-    const MIED = 8;
+    const MEN = 8;
     const FONDO_CESANTIAS = 9;
 
     private static $descriptions = [
@@ -25,7 +25,7 @@ class EnumTipoServicioSeguridadSocial
         ['id' => self::SENA, 'code' => 'SENA', 'description' => "SENA"],
         ['id' => self::ICBF, 'code' => 'ICBF', 'description' => "ICBF"],
         ['id' => self::ESAP, 'code' => 'ESAP', 'description' => "ESAP"],
-        ['id' => self::MIED, 'code' => 'MIED', 'description' => "Ministerio de Educación"],
+        ['id' => self::MEN, 'code' => 'MEN', 'description' => "Ministerio de Educación"],
         ['id' => self::FONDO_CESANTIAS, 'code' => 'FONDO_CESANTIAS', 'description' => "Fondo de Cesantías"]
     ];
 
