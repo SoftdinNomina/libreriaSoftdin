@@ -13,7 +13,7 @@ class EnumContinente
     public const EUROPA = 3;
     public const AMERICA_NORTE = 4;
     public const AMERICA_SUR = 5;
-    public const OCEANIA = 5;
+    public const OCEANIA = 6;
 
     private static $descriptions = [
         ['id' => self::ASIA, 'code' => 'ASIA', 'description' => 'Asia'],
