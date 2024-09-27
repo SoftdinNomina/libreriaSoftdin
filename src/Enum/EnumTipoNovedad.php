@@ -14,8 +14,6 @@ class EnumTipoNovedad
     public const PROV_SEGSOC = 5;
     public const PLANILLA_UNICA = 6;
     public const LIQUIDACION = 7;
-    public const CAMBIOS_V = 8;
-    public const CAMBIOS_C = 9;
     public const AGRUPAR = 10;
     public const FORMULA = 11;
 
@@ -27,8 +25,6 @@ class EnumTipoNovedad
         ['id' => self::PROV_SEGSOC, 'code' => 'PROV_SEGSOC', 'description' => 'Provisión Seguridad Social'],
         ['id' => self::PLANILLA_UNICA, 'code' => 'PLANILLA_UNICA', 'description' => 'Planilla Única'],
         ['id' => self::LIQUIDACION, 'code' => 'LIQUIDACION', 'description' => 'Liquidación'],
-        ['id' => self::CAMBIOS_V, 'code' => 'CAMBIOS_V', 'description' => 'Cambios Vinculación'],
-        ['id' => self::CAMBIOS_C, 'code' => 'CAMBIOS_C', 'description' => 'Cambios Contratación'],
         ['id' => self::AGRUPAR, 'code' => 'AGRUPAR', 'description' => 'Agrupar'],
         ['id' => self::FORMULA, 'code' => 'FORMULA', 'description' => 'Fórmula'],
     ];
