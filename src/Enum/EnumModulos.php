@@ -8,13 +8,19 @@ use Illuminate\Support\Collection;
 class EnumModulos
 {
     public const CONTRATACION = 1;
-    public const PRESTAMO = 2;
-    // public const TIEMPO = 3;
+    public const LIQ_NOMINA = 2;
+    public const LIQ_VACACIONES = 3;
+    public const LIQ_PRESTSOCIALES = 4;
+    public const LIQ_CONTRATO = 5;
+    public const LIQ_PRESTAMO = 6;
 
     private static $descriptions = [
         ['id' => self::CONTRATACION, 'code' => 'CONTRATACION', 'description' => 'Contratacion'],
-        ['id' => self::PRESTAMO, 'code' => 'PRESTAMO', 'description' => 'Prestamo'],
-        // ['id' => self::TIEMPO, 'code' => 'TIEMPO', 'description' => 'Registro de Tiempo Suplementario'],
+        ['id' => self::LIQ_NOMINA, 'code' => 'LIQ_NOMINA', 'description' => 'Liquidación de Nómina'],
+        ['id' => self::LIQ_VACACIONES, 'code' => 'LIQ_VACACIONES', 'description' => 'Liquidación de Vacaciones'],
+        ['id' => self::LIQ_PRESTSOCIALES, 'code' => 'LIQ_PRESTSOCIALES', 'description' => 'Liquidación de Prestaciones Sociales'],
+        ['id' => self::LIQ_CONTRATO, 'code' => 'LIQ_CONTRATO', 'description' => 'Liquidación de Contrato'],
+        ['id' => self::PRESTAMO, 'code' => 'PRESTAMO', 'description' => 'Préstamo'],
     ];
 
 
