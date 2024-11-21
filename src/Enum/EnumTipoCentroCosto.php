@@ -10,11 +10,13 @@ class EnumTipoCentroCosto
     public const UNICO = 1;
     public const TIEMPO = 2;
     public const PORCENTAJE = 3;
+    public const PORCENTAJE_TIEMPO = 4;
 
     private static $descriptions = [
         ['id' => self::UNICO, 'code' => 'UNICO', 'description' => 'Unico'],
         ['id' => self::TIEMPO, 'code' => 'TIEMPO', 'description' => 'Tiempo'],
         ['id' => self::PORCENTAJE, 'code' => 'PORCENTAJE', 'description' => 'Porcentaje'],
+        ['id' => self::PORCENTAJE_TIEMPO, 'code' => 'PORCENTAJE_TIEMPO', 'description' => 'Porcentaje y Tiempo'],
     ];
 
     public static function getCollection()
