@@ -12,7 +12,7 @@ class EnumModulos
     public const LIQ_VACACIONES = 3;
     public const LIQ_PRESTSOCIALES = 4;
     public const LIQ_CONTRATO = 5;
-    public const LIQ_PRESTAMO = 6;
+    public const PRESTAMO = 6;
 
     private static $descriptions = [
         ['id' => self::CONTRATACION, 'code' => 'CONTRATACION', 'description' => 'Contratacion'],
