@@ -9,7 +9,7 @@ class EnumTipoIdentificacionEmbargo
 {
     const CC = EnumTipoIdentificacion::CC;
     const CE = EnumTipoIdentificacion::CE;
-    const NIT_P = EnumTipoIdentificacion::NIT;
+    const NIT_P = EnumTipoIdentificacion::NI;
     const PA = EnumTipoIdentificacion::PA;
     const TI = EnumTipoIdentificacion::TI;
     const NIT_O = EnumTipoIdentificacion::NITO;
