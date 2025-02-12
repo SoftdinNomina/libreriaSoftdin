@@ -16,7 +16,7 @@ class EnumTipoIdentificacion
     const NI = 6;
     const CD = 7;
     const SC = 8;
-    const NIO = 6;
+    const NIO = 9;
 
     private static $descriptions = [
         ['id' => self::CC, 'code' => 'CC', 'description' => "Cedula de Ciudadania"],
