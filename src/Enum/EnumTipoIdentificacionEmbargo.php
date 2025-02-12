@@ -12,7 +12,7 @@ class EnumTipoIdentificacionEmbargo
     const NIT_P = EnumTipoIdentificacion::NI;
     const PA = EnumTipoIdentificacion::PA;
     const TI = EnumTipoIdentificacion::TI;
-    const NIT_O = EnumTipoIdentificacion::NITO;
+    const NIT_O = EnumTipoIdentificacion::NIO;
 
     private static $descriptions = [
         ['id' => self::CC, 'code' => 'CC', 'description' => "Cedula de Ciudadanía"],
